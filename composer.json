@@ -30,7 +30,8 @@
         "hyperf/rpc-client": "~1.1.0",
         "hyperf/rpc-server": "~1.1.0",
         "hyperf/constants": "~1.1.0",
-        "hyperf/model-cache": "~1.1.0"
+        "hyperf/model-cache": "~1.1.0",
+        "lmz/hyperf-lib": "dev-master"
     },
     "require-dev": {
         "swoole/ide-helper": "^4.4",
