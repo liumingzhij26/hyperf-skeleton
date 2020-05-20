@@ -31,7 +31,7 @@
         "hyperf/rpc-server": "~1.1.0",
         "hyperf/constants": "~1.1.0",
         "hyperf/model-cache": "~1.1.0",
-        "lmz/hyperf-lib": "dev-master"
+        "thefair/thefairlib": "^4.0"
     },
     "require-dev": {
         "swoole/ide-helper": "^4.4",

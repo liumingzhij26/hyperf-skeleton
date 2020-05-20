@@ -14,8 +14,8 @@ namespace App\Controller\V1;
 
 use Hyperf\HttpServer\Annotation\AutoController;
 use Hyperf\RpcServer\Annotation\RpcService;
-use HyperfLib\Annotation\Doc;
-use HyperfLib\Controller\AbstractController;
+use TheFairLib\Annotation\Doc;
+use TheFairLib\Controller\AbstractController;
 
 /**
  * @Doc(name="测试", desc="主要用于文档测试")

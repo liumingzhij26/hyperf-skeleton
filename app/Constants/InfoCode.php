@@ -10,7 +10,7 @@ use Hyperf\Constants\Annotation\Constants;
  * @Constants
  * @method static getMessage($code, $data)
  */
-class InfoCode extends \HyperfLib\Constants\InfoCode
+class InfoCode extends \TheFairLib\Constants\InfoCode
 {
 
 }

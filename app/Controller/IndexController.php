@@ -11,7 +11,7 @@ declare(strict_types=1);
  */
 namespace App\Controller;
 
-use HyperfLib\Controller\AbstractController;
+use TheFairLib\Controller\AbstractController;
 
 class IndexController extends AbstractController
 {

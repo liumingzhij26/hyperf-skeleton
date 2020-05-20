@@ -12,7 +12,7 @@ declare(strict_types=1);
 use Hyperf\HttpServer\Server as HttpServer;
 use Hyperf\Server\Server;
 use Hyperf\Server\SwooleEvent;
-use HyperfLib\Server\Core\TcpServer;
+use TheFairLib\Server\Core\TcpServer;
 
 return [
     'mode' => SWOOLE_PROCESS,

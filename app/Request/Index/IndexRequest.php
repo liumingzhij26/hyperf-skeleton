@@ -11,7 +11,7 @@ declare(strict_types=1);
  */
 namespace App\Request\Index;
 
-use HyperfLib\Request\BaseRequest;
+use TheFairLib\Request\BaseRequest;
 
 class IndexRequest extends BaseRequest
 {

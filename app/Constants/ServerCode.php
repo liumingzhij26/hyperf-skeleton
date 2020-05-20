@@ -19,7 +19,7 @@ use Hyperf\Constants\Annotation\Constants;
  * @Constants
  * @method static getMessage($code, $data)
  */
-class ServerCode extends \HyperfLib\Constants\ServerCode
+class ServerCode extends \TheFairLib\Constants\ServerCode
 {
 
 

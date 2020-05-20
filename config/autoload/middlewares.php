@@ -10,8 +10,8 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
 use Hyperf\Validation\Middleware\ValidationMiddleware;
-use HyperfLib\Middleware\Auth\ServiceAuthMiddleware;
-use HyperfLib\Middleware\RequestMiddleware;
+use TheFairLib\Middleware\Auth\ServiceAuthMiddleware;
+use TheFairLib\Middleware\RequestMiddleware;
 
 $list = [
     RequestMiddleware::class,

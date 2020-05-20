@@ -11,7 +11,7 @@ declare(strict_types=1);
  */
 namespace App\Model;
 
-use HyperfLib\Model\DataModel;
+use TheFairLib\Model\DataModel;
 
 /**
  * @internal

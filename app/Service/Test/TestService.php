@@ -11,7 +11,7 @@ declare(strict_types=1);
  */
 namespace App\Service\Test;
 
-use HyperfLib\Service\BaseService;
+use TheFairLib\Service\BaseService;
 
 class TestService extends BaseService
 {
