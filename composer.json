@@ -70,7 +70,7 @@
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-autoload-dump": [
-            "php bin/hyperf.php vendor:publish lmz/hyperf-lib",
+            "php bin/hyperf.php vendor:publish thefair/thefairlib",
             "init-proxy.sh"
         ],
         "test": "co-phpunit -c phpunit.xml --colors=always",
@@ -78,5 +78,11 @@
         "analyse": "phpstan analyse --memory-limit 300M -l 0 -c phpstan.neon ./app ./config",
         "start": "php ./bin/hyperf.php start",
         "init-proxy": "init-proxy.sh"
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://mirrors.aliyun.com/composer/"
+        }
     }
 }
