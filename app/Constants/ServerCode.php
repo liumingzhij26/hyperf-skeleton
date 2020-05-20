@@ -9,13 +9,19 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
-namespace App\Model;
 
-use HyperfLib\Model\DataModel;
+namespace App\Constants;
+
+use Hyperf\Constants\AbstractConstants;
+use Hyperf\Constants\Annotation\Constants;
 
 /**
- * @internal
+ * @Constants
+ * @method static getMessage($code, $data)
  */
-class Test extends DataModel
+class ServerCode extends \HyperfLib\Constants\ServerCode
 {
+
+
+
 }
