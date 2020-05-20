@@ -120,7 +120,6 @@ return [
                         'hyperf/model-cache',
                     ],
                     'resources' => [
-                        'resources/model_cache/Model.php' => 'app/Model/Model.php',
                         'resources/model_cache/databases.php' => 'config/autoload/databases.php',
                     ],
                 ],
