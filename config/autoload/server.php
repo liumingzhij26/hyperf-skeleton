@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /**
  * This file is part of Hyperf.
  *
@@ -10,10 +9,9 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
-
+use Hyperf\HttpServer\Server as HttpServer;
 use Hyperf\Server\Server;
 use Hyperf\Server\SwooleEvent;
-use Hyperf\HttpServer\Server as HttpServer;
 use HyperfLib\Server\Core\TcpServer;
 
 return [
@@ -58,9 +56,9 @@ return [
         'max_request' => 100000,
 
         //https://wiki.swoole.com/wiki/page/612.html
-        'socket_buffer_size' => 2 * 1024 * 1024,//单次最大发送长度，理论上不允许大于 1M
+        'socket_buffer_size' => 2 * 1024 * 1024, //单次最大发送长度，理论上不允许大于 1M
 
-//        'task_worker_num' => 2,
+        //        'task_worker_num' => 2,
     ],
     'callbacks' => [
         SwooleEvent::ON_BEFORE_START => [Hyperf\Framework\Bootstrap\ServerStartCallback::class, 'beforeStart'],
@@ -68,7 +66,7 @@ return [
         SwooleEvent::ON_PIPE_MESSAGE => [Hyperf\Framework\Bootstrap\PipeMessageCallback::class, 'onPipeMessage'],
 
         // Task callbacks
-//        SwooleEvent::ON_TASK => [Hyperf\Framework\Bootstrap\TaskCallback::class, 'onTask'],
-//        SwooleEvent::ON_FINISH => [Hyperf\Framework\Bootstrap\FinishCallback::class, 'onFinish'],
+        //        SwooleEvent::ON_TASK => [Hyperf\Framework\Bootstrap\TaskCallback::class, 'onTask'],
+        //        SwooleEvent::ON_FINISH => [Hyperf\Framework\Bootstrap\FinishCallback::class, 'onFinish'],
     ],
 ];

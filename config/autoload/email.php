@@ -1,18 +1,15 @@
 <?php
-/***************************************************************************
- *
- * Copyright (c) 2020 liumingzhi, Inc. All Rights Reserved
- *
- **************************************************************************
- *
- * @file Email.php
- * @author liumingzhi(liumingzhij26@gmail.com)
- * @date 2020-01-02 12:22:00
- *
- **/
 
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://doc.hyperf.io
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ */
 return [
-
     'system_notice' => [
         'host' => env('EMAIL_HOST'),
         'port' => env('EMAIL_PORT'),
@@ -21,7 +18,6 @@ return [
     ],
 
     'system_administrator' => [
-//        'liumingzhi@thefair.net.cn'
+        //        'liumingzhi@thefair.net.cn'
     ],
-
 ];

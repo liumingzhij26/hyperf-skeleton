@@ -9,7 +9,6 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
-
 use Hyperf\Validation\Middleware\ValidationMiddleware;
 use HyperfLib\Middleware\Auth\ServiceAuthMiddleware;
 use HyperfLib\Middleware\RequestMiddleware;
@@ -24,4 +23,3 @@ return [
     'http' => $list,
     'json-rpc' => $list,
 ];
-

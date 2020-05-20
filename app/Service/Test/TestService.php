@@ -9,5 +9,10 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
-return [
-];
+namespace App\Service\Test;
+
+use HyperfLib\Service\BaseService;
+
+class TestService extends BaseService
+{
+}

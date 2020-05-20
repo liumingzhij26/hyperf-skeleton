@@ -1,18 +1,15 @@
 <?php
-/***************************************************************************
- *
- * Copyright (c) 2020 liumingzhi, Inc. All Rights Reserved
- *
- **************************************************************************
- *
- * @file auth.php
- * @author liumingzhi(liumingzhij26@gmail.com)
- * @date 2020-03-18 18:40:00
- *
- **/
 
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://doc.hyperf.io
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ */
 return [
-
     'url_blacklist' => [
         'system_reserved' => [
             'method' => [
@@ -23,7 +20,6 @@ return [
                 '__set',
             ],
             'route' => [
-
             ],
         ],
     ],

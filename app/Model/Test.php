@@ -9,18 +9,14 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
-namespace App\Constants;
+namespace App\Model;
 
-use Hyperf\Constants\AbstractConstants;
-use Hyperf\Constants\Annotation\Constants;
+use HyperfLib\Model\DataModel;
 
 /**
- * @Constants
+ * @internal
+ * @coversNothing
  */
-class ErrorCode extends AbstractConstants
+class Test extends DataModel
 {
-    /**
-     * @Message("Server Error！")
-     */
-    const SERVER_ERROR = 500;
 }

@@ -1,24 +1,18 @@
 <?php
-/***************************************************************************
- *
- * Copyright (c) 2020 liumingzhi, Inc. All Rights Reserved
- *
- **************************************************************************
- *
- * @file validation.php
- * @author liumingzhi(liumingzhij26@gmail.com)
- * @date 2020-03-19 10:26:00
- *
- **/
 
-
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://doc.hyperf.io
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ */
 use HyperfLib\Request\BaseRequest;
 
 return [
-
     'request' => [
         BaseRequest::class,
     ],
-
-
 ];
