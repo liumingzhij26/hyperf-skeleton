@@ -124,6 +124,7 @@ class OptionalPackages
         $this->io->write('<info>Default time zone for php.ini</info>');
         $this->io->write('<info>Make your selection or type a time zone name, like Asia/Shanghai</info>');
         $content = file_get_contents($this->installerSource . '/resources/bin/hyperf.stub');
+        $content = str_replace('%TIME_ZONE%', 'Asia/Shanghai', $content);
         file_put_contents($this->projectRoot . '/bin/hyperf.php', $content);
     }
 
