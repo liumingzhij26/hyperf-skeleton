@@ -20,7 +20,7 @@
 
 安装包 `composer up`
 
-启动服务开发 `php watch.php -c`
+启动服务开发 `php dev_start.php -c`
 
 ## 项目文件结构
 
