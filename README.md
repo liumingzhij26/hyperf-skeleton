@@ -16,7 +16,7 @@
 
 `composer create-project lmz/thefair-skeleton test_service`
 
-本地配置文件 `cp .env.example .env`
+本地配置文件 `.env`
 
 安装包 `composer up`
 
@@ -64,7 +64,7 @@
 ├── .env.example    // demo 开发配置文件
 ├── .editorconfig   // 编辑器参数约定
 ├── README.md       // 说明文档
-└── dev_start.php       // 本地开发热更新文件
+└── watch.php       // 本地开发热更新文件
 ```
 
 ### 配置文件结构
@@ -130,7 +130,6 @@ config
 
 http 服务使用 `@AutoController` 
 Rpc 服务使用 `@RpcService`
-
 
 ### 参数过滤
 
@@ -206,8 +205,86 @@ mobile 国内手机号验证
 str 对字符串进行编码
 `   'phone' => 'required|str'` 
 
+## Model 模型
 
-## sql 注入
+约束：只做数据库、缓存操作，不写业务逻辑，业务推荐写在 service 里面
+
+### 分表自动创建模型
+
+```shell
+php bin/hyperf.php gen:dataModel user_info --sharding-num=20 --pool=thefair_user
+```
+
+```php
+<?php
+
+declare (strict_types=1);
+namespace App\Model\User;
+
+use TheFairLib\Model\DataModel;
+/**
+ * @property int $uid 用户id，用于做sharding
+ * @property string $username 用户名
+ * @property string $country_code 国家编码
+ * @property string $country 注册国家
+ * @property int $nationality 国籍
+ * @property string $nick 昵称
+ * @property string $sex 用户性别
+ * @property string $mobile 用户手机号（加密）
+ * @property string $password 用户密码
+ * @property string $avatar 头像地址
+ * @property string $state 用户状态
+ * @property string $source 注册来源
+ * @property string $app_source æ³¨å†Œåº”ç”¨æ¥æº
+ * @property string $self_desc 自我描述
+ * @property string $auth_desc 认证描述
+ * @property string $geek_desc 达人描述
+ * @property string $salt 加密salt
+ * @property string $last_visit_time 最后访问时间
+ * @property string $last_visit_ip 
+ * @property string $reg_ip 
+ * @property string $ctime 创建时间
+ * @property string $utime 更新时间
+ */
+class UserInfo extends DataModel
+{
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'user_info';
+    /**
+     * The connection name for the model.
+     *
+     * @var string
+     */
+    protected $connection = 'thefair_user';
+    /**
+     * sharding num
+     *
+     * @var int
+     */
+    protected $shardingNum = 20;
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['uid', 'username', 'country_code', 'country', 'nationality', 'nick', 'sex', 'mobile', 'password', 'avatar', 'state', 'source', 'app_source', 'self_desc', 'auth_desc', 'geek_desc', 'salt', 'last_visit_time', 'last_visit_ip', 'reg_ip', 'ctime', 'utime'];
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = ['uid' => 'integer', 'nationality' => 'integer'];
+}
+```
+
+
+
+
+### sql 注入
 
 demo 用例
 
@@ -317,7 +394,7 @@ After=syslog.target
 [Service]
 Type=simple
 LimitNOFILE=65535
-ExecStart=/usr/bin/php /home/xxx/www/user_service/bin/hyperf.php start
+ExecStart=/usr/bin/php /home/thefair/www/user_service/bin/hyperf.php start
 ExecReload=/bin/kill -USR1 $MAINPID
 Restart=always
 
@@ -346,7 +423,7 @@ sudo systemctl status user.service
 # 新建一个应用并设置一个名称，这里设置为 user_service
 [program:user_service]
 # 设置命令在指定的目录内执行
-directory=/home/xxx/www/user_service/
+directory=/home/thefair/www/user_service/
 # 这里为您要管理的项目的启动命令
 command=php ./bin/hyperf.php start
 # 以哪个用户来运行该进程
@@ -360,9 +437,9 @@ startsecs=1
 # 重试次数
 startretries=3
 # stderr 日志输出位置
-stderr_logfile=/home/xxx/www/user_service/runtime/stderr.log
+stderr_logfile=/home/thefair/www/user_service/runtime/stderr.log
 # stdout 日志输出位置
-stdout_logfile=/home/xxx/www/user_service/runtime/stdout.log
+stdout_logfile=/home/thefair/www/user_service/runtime/stdout.log
 ```
 
 启动 Supervisor
@@ -393,3 +470,4 @@ supervisorctl reload
 ```shell
 composer test
 ```
+
