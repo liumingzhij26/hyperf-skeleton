@@ -80,7 +80,6 @@
         "cs-fix": "php-cs-fixer fix $1",
         "analyse": "phpstan analyse --memory-limit 300M -l 0 -c phpstan.neon ./app ./config",
         "start": "php ./bin/hyperf.php start",
-        "model": "php ./bin/hyperf.php gen:dataModel $1 --sharding-num=$2 --pool=$3",
         "init-proxy": "init-proxy.sh"
     },
     "repositories": {
