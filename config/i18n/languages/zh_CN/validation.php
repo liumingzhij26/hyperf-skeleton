@@ -9,7 +9,6 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
-
 return [
     /*
     |--------------------------------------------------------------------------
@@ -177,7 +176,6 @@ return [
     'sequential_array' => ':attribute 必须是一个有序数组',
 
     'server_error' => '服务器错误',
-
 
     'post' => ':post 必须为 post 请求',
     'get' => ':get 必须为 get 请求',

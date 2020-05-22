@@ -1,22 +1,19 @@
 <?php
-/***************************************************************************
- *
- * Copyright (c) 2020 liumingzhi, Inc. All Rights Reserved
- *
- **************************************************************************
- *
- * @file push.php
- * @author liumingzhi(liumingzhij26@gmail.com)
- * @date 2020-05-17 21:24:00
- *
- **/
 
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://doc.hyperf.io
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ */
 return [
-
     'project_list' => [
         1 => [
             'name' => '新世相读书会app',
-            'default_platform' => 'getui',//all
+            'default_platform' => 'getui', //all
             'push_platform' => [
                 'getui' => [
                     'app_id' => 'xxxx',

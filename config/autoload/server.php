@@ -58,7 +58,7 @@ return [
         //https://wiki.swoole.com/wiki/page/612.html
         'socket_buffer_size' => 2 * 1024 * 1024, //单次最大发送长度，理论上不允许大于 1M
 
-                'task_worker_num' => 2,
+        'task_worker_num' => 2,
     ],
     'callbacks' => [
         SwooleEvent::ON_BEFORE_START => [Hyperf\Framework\Bootstrap\ServerStartCallback::class, 'beforeStart'],

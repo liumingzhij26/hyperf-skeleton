@@ -10,7 +10,7 @@
  * Open the terminal console in the project root directory and enter：php watch
  * 在项目根目录下打开终端控制台，输入：php watch
  * If you want to clean the /runtime/container cache, enter: php watch -c
- * 如果你想要清除/runtime/container缓存，则输入：php watch -c
+ * 如果你想要清除/runtime/container缓存，则输入：php watch -c.
  */
 date_default_timezone_set('Asia/Shanghai');
 # PHP Bin File PHP程序所在路径（默认自动获取）
@@ -30,30 +30,30 @@ const PID_FILE_PATH = WATCH_DIR . '/runtime/hyperf.pid';
 # Scan Interval 扫描间隔（毫秒，默认2000）
 const SCAN_INTERVAL = 2000;
 
-if (!function_exists('exec')) {
+if (! function_exists('exec')) {
     echo '[x] 请在php.ini配置中取消禁用exec方法' . PHP_EOL;
     exit(1);
 }
 
 define('PHP', PHP_BIN_FILE == 'which php' ? @exec('which php') : PHP_BIN_FILE);
-if (!file_exists(PHP) || !is_executable(PHP)) {
+if (! file_exists(PHP) || ! is_executable(PHP)) {
     echo '[x] PHP bin (" ' . PHP . ' ") 路径没有找到或无法执行，请确认路径正确?' . PHP_EOL;
     exit(1);
 }
 
-if (!file_exists(ENTRY_POINT_FILE)) {
+if (! file_exists(ENTRY_POINT_FILE)) {
     echo '[x] 入口文件 ("' . ENTRY_POINT_FILE . '") 没有找到，请确认文件存在?' . PHP_EOL;
     exit(1);
 }
 
+use Swoole\Event;
 use Swoole\Process;
 use Swoole\Timer;
-use Swoole\Event;
 
 swoole_async_set(['enable_coroutine' => false, 'log_level' => SWOOLE_LOG_INFO]);
 $hashes = [];
 $serve = null;
-echo "🚀 Start @ " . date('Y-m-d H:i:s') . PHP_EOL;
+echo '🚀 Start @ ' . date('Y-m-d H:i:s') . PHP_EOL;
 start();
 state();
 Timer::tick(SCAN_INTERVAL, 'watch');
@@ -62,7 +62,7 @@ function killOldProcess()
 {
     // pid存在则关闭存在的进程
     if (file_exists(PID_FILE_PATH) && $pid = @file_get_contents(PID_FILE_PATH)) {
-        if (!@posix_kill($pid, SIGKILL)) {
+        if (! @posix_kill($pid, SIGKILL)) {
             forceKill();
         }
     } else {
@@ -73,7 +73,7 @@ function killOldProcess()
 function forceKill($match = 'hyperf')
 {
     // 找不到pid，强杀.Master进程（不够优雅，可能会误杀其它进程名也为.Master的进程，T_T）
-    exec("ps -ef | grep '$match' | grep -v grep |awk '{print $2}'| xargs kill -9 2>&1");
+    exec("ps -ef | grep '{$match}' | grep -v grep |awk '{print $2}'| xargs kill -9 2>&1");
 }
 
 function start()
@@ -83,13 +83,13 @@ function start()
     global $serve;
     $serve = new Process('serve', true);
     $serve->start();
-    if (false === $serve->pid) {
+    if ($serve->pid === false) {
         echo swoole_strerror(swoole_errno()) . PHP_EOL;
         exit(1);
     }
     Event::add($serve->pipe, function ($pipe) use (&$serve) {
         $message = @$serve->read();
-        if (!empty($message)) {
+        if (! empty($message)) {
             echo $message;
         }
     });
@@ -99,7 +99,7 @@ function watch()
 {
     global $hashes;
     foreach ($hashes as $pathName => $currentHash) {
-        if (!file_exists($pathName)) {
+        if (! file_exists($pathName)) {
             unset($hashes[$pathName]);
             continue;
         }
@@ -118,13 +118,13 @@ function state()
     $files = phpFiles(WATCH_DIR);
     $hashes = array_combine($files, array_map('fileHash', $files));
     $count = count($hashes);
-    echo "📡 Watching $count files..." . PHP_EOL;
+    echo "📡 Watching {$count} files..." . PHP_EOL;
 }
 
 function change()
 {
     global $serve;
-    echo "🔄 Restart @ " . date('Y-m-d H:i:s') . PHP_EOL;
+    echo '🔄 Restart @ ' . date('Y-m-d H:i:s') . PHP_EOL;
     Process::kill($serve->pid);
     start();
 }
@@ -142,7 +142,7 @@ function serve(Process $serve)
 function fileHash(string $pathname): string
 {
     $contents = file_get_contents($pathname);
-    if (false === $contents) {
+    if ($contents === false) {
         return 'deleted';
     }
     return md5($contents);
@@ -191,12 +191,12 @@ class Filter extends RecursiveFilterIterator
             if (preg_match('/^\./', $this->current()->getFilename())) {
                 return false;
             }
-            return !in_array($this->current()->getFilename(), EXCLUDE_DIR);
+            return ! in_array($this->current()->getFilename(), EXCLUDE_DIR);
         }
         $list = array_map(function (string $item): string {
-            return "\.$item";
+            return "\\.{$item}";
         }, explode(',', WATCH_EXT));
         $list = implode('|', $list);
-        return preg_match("/($list)$/", $this->current()->getFilename());
+        return preg_match("/({$list})$/", $this->current()->getFilename());
     }
 }

@@ -9,10 +9,8 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
-
 namespace App\Constants;
 
-use Hyperf\Constants\AbstractConstants;
 use Hyperf\Constants\Annotation\Constants;
 
 /**
@@ -21,7 +19,4 @@ use Hyperf\Constants\Annotation\Constants;
  */
 class ServerCode extends \TheFairLib\Constants\ServerCode
 {
-
-
-
 }

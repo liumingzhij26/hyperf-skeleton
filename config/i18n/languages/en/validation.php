@@ -9,7 +9,6 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
-
 return [
     /*
     |--------------------------------------------------------------------------
@@ -183,5 +182,4 @@ return [
     'str' => 'The :str must be a string.',
 
     'mobile' => 'The :mobile must be a valid mobile number',
-
 ];
