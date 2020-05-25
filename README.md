@@ -212,8 +212,9 @@ str 对字符串进行编码
 ### 分表自动创建模型
 
 ```shell
-php bin/hyperf.php gen:dataModel user_info --sharding-num=20 --pool=thefair_user
+php bin/hyperf.php gen:dataModel user_info
 ```
+![-w790](http://sh.cdnimage.net/mweb/2020052515903751991692/15903751646681-15903751991692.jpg)
 
 ```php
 <?php
