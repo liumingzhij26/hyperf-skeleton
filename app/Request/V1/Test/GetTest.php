@@ -15,7 +15,6 @@ use TheFairLib\Request\BaseRequest;
 
 /**
  * @internal
- * @coversNothing
  */
 class GetTest extends BaseRequest
 {
