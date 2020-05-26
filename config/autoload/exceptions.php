@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 /**
  * This file is part of Hyperf.
  *
@@ -9,12 +10,15 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
+
 use TheFairLib\Exception\Handler\AppExceptionHandler;
 use TheFairLib\Exception\Handler\QueryExceptionHandler;
 use TheFairLib\Exception\Handler\RateLimitExceptionHandler;
 use TheFairLib\Exception\Handler\Rpc\RpcAppExceptionHandler;
-use TheFairLib\Exception\Handler\Rpc\RpcServiceExceptionHandler;
+use TheFairLib\Exception\Handler\Rpc\RpcQueryExceptionHandler;
+use TheFairLib\Exception\Handler\Rpc\RpcRateLimitExceptionHandler;
 use TheFairLib\Exception\Handler\Rpc\RpcValidationExceptionHandler;
+use TheFairLib\Exception\Handler\Rpc\RpcServiceExceptionHandler;
 use TheFairLib\Exception\Handler\ServiceExceptionHandler;
 use TheFairLib\Exception\Handler\ValidationExceptionHandler;
 
@@ -31,7 +35,9 @@ return [
         'json-rpc' => [
             RpcAppExceptionHandler::class,
             RpcServiceExceptionHandler::class,
+            RpcQueryExceptionHandler::class,
             RpcValidationExceptionHandler::class,
+            RpcRateLimitExceptionHandler::class,
         ],
     ],
 ];
