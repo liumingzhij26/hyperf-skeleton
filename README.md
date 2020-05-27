@@ -137,6 +137,7 @@ Rpc 服务使用 `@RpcService`
 
 必须新建一个对应的 `app/Request/V2/Test/GetTest.php` 文件
 
+生成命令：`php bin/hyperf.php gen:request V2/Test/GetTest`
 
 ```php
 public function getTest()
@@ -376,6 +377,15 @@ throw new EmptyException('数据为空', ['uid' => 1]);
         "exception": "App\\Exception\\EmptyException"
     }
 }
+```
+
+## 新 php7 访问 rpc 服务
+
+
+```php
+$data = \TheFairLib\Service\JsonRpc\RpcClient\Client::Instance('thefair_service')->call('/v2/test/get_test', [
+
+]);
 ```
 
 ## 线上服务启动 
