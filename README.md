@@ -406,13 +406,92 @@ throw new EmptyException('数据为空', ['uid' => 1]);
 }
 ```
 
-## 新 php7 访问 rpc 服务
+## 新 api 访问 rpc 服务
 
 
 ```php
 $data = \TheFairLib\Service\JsonRpc\RpcClient\Client::Instance('thefair_service')->call('/v2/test/get_test', [
 
 ]);
+```
+
+## hyperf service 服务之间的访问
+
+配置文件 `config/autoload/services.php`
+
+
+```php
+<?php
+
+declare(strict_types=1);
+
+return [
+     'consumers' => [
+        [
+            'name' => 'v2/test',
+            'service' => '',
+            'protocol' => 'jsonrpc-tcp-length-check',
+            'load_balancer' => 'random',
+            'nodes' => [
+                [
+                    'host' => '192.168.0.249',
+                    'port' => 2301,
+                ],
+            ],
+            'app_key' => 'xxx',
+            'app_secret' => 'xxx1111',
+            // 配置项，会影响到 Packer 和 Transporter
+            'options' => [
+                'connect_timeout' => 5.0,
+                'recv_timeout' => 5.0,
+                'settings' => [
+                    // 根据协议不同，区分配置
+                    'open_length_check' => true,
+                    'package_length_type' => 'N',
+                    'package_length_offset' => 0,
+                    'package_body_offset' => 4,
+                    'package_max_length' => 1024 * 1024 * 2,
+                ],
+                // 当使用 JsonRpcPoolTransporter 时会用到以下配置
+                'pool' => [
+                    'min_connections' => 1,
+                    'max_connections' => 32,
+                    'connect_timeout' => 10.0,
+                    'wait_timeout' => 3.0,
+                    'heartbeat' => -1,
+                    'max_idle_time' => 60.0,
+                ],
+            ],
+        ],
+    ],
+];
+
+```
+
+
+新建 RpcClient 
+
+```php
+<?php
+
+
+namespace App\Rpc;
+
+class Test extends \TheFairLib\Server\Client\JsonRpcClient
+{
+
+    /**
+     * 定义对应服务提供者的服务名称
+     * @var string
+     */
+    protected $serviceName = 'v2/test';
+
+}
+```
+
+访问
+```php
+make(Test::class)->call('get_test')
 ```
 
 ## 线上服务启动 
