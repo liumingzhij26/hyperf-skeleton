@@ -135,6 +135,8 @@ config
 http 服务使用 `@AutoController` 
 Rpc 服务使用 `@RpcService`
 
+如 ` * @RpcService(name="v2/test", protocol="jsonrpc-tcp-length-check", server="json-rpc")`
+
 ### 参数过滤
 
 路由 `/v2/test/get_test` 对应 `\App\Controller\V2\Test::getTest` 方法
