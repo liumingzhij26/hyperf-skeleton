@@ -16,36 +16,42 @@ use TheFairLib\Server\Core\TcpServer;
 
 return [
     'mode' => SWOOLE_PROCESS,
-    'servers' => [
-        [
-            'name' => 'http',
-            'type' => Server::SERVER_HTTP,
-            'host' => '0.0.0.0',
-            'port' => 9501,
-            'sock_type' => SWOOLE_SOCK_TCP,
-            'callbacks' => [
-                SwooleEvent::ON_REQUEST => [HttpServer::class, 'onRequest'],
+    'servers' => value(function () {
+        $data = [
+            [
+                //https://wiki.geekdream.com/Specification/json-rpc_2.0.html
+                'name' => 'json-rpc',
+                'type' => Server::SERVER_BASE,
+                'host' => '0.0.0.0',
+                'port' => 2301,
+                'sock_type' => SWOOLE_SOCK_TCP,
+                'callbacks' => [
+                    SwooleEvent::ON_RECEIVE => [TcpServer::class, 'onReceive'],
+                ],
+                'settings' => [
+                    'open_length_check' => true,
+                    'package_length_type' => 'N',
+                    'package_length_offset' => 0,
+                    'package_body_offset' => 4,
+                    'package_max_length' => 1024 * 1024 * 2,
+                ],
             ],
-        ],
-        [
-            //https://wiki.geekdream.com/Specification/json-rpc_2.0.html
-            'name' => 'json-rpc',
-            'type' => Server::SERVER_BASE,
-            'host' => '0.0.0.0',
-            'port' => 2301,
-            'sock_type' => SWOOLE_SOCK_TCP,
-            'callbacks' => [
-                SwooleEvent::ON_RECEIVE => [TcpServer::class, 'onReceive'],
-            ],
-            'settings' => [
-                'open_length_check' => true,
-                'package_length_type' => 'N',
-                'package_length_offset' => 0,
-                'package_body_offset' => 4,
-                'package_max_length' => 1024 * 1024 * 2,
-            ],
-        ],
-    ],
+        ];
+
+        if (env('PHASE') == 'rd') {
+            $data[] = [
+                'name' => 'http',
+                'type' => Server::SERVER_HTTP,
+                'host' => '0.0.0.0',
+                'port' => 9501,
+                'sock_type' => SWOOLE_SOCK_TCP,
+                'callbacks' => [
+                    SwooleEvent::ON_REQUEST => [HttpServer::class, 'onRequest'],
+                ],
+            ];
+        }
+        return $data;
+    }),
     'settings' => [
         'enable_coroutine' => true,
         'worker_num' => swoole_cpu_num(),
