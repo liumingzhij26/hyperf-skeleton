@@ -23,7 +23,7 @@ return [
                 'name' => 'json-rpc',
                 'type' => Server::SERVER_BASE,
                 'host' => '0.0.0.0',
-                'port' => 2301,
+                'port' => (int) env('RPC_POST', 3201),
                 'sock_type' => SWOOLE_SOCK_TCP,
                 'callbacks' => [
                     SwooleEvent::ON_RECEIVE => [TcpServer::class, 'onReceive'],
