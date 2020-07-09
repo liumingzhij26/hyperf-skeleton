@@ -9,9 +9,9 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
-use Hyperf\HttpServer\Server as HttpServer;
 use Hyperf\Server\Server;
 use Hyperf\Server\SwooleEvent;
+use TheFairLib\Server\Core\HttpServer;
 use TheFairLib\Server\Core\TcpServer;
 
 return [
