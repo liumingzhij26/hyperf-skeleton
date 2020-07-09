@@ -14,101 +14,58 @@ declare(strict_types=1);
 use Monolog\Handler;
 use Monolog\Formatter;
 use Monolog\Logger;
+use TheFairLib\Library\Logger\RotatingFileHandler;
 
 //
 $appEnv = env('PHASE', 'rd');
 $appName = env('APP_NAME');
-
-
+//关闭日志写入功能
+$closeLogger = (bool)env('CLOSE_LOG', false);
+$formatter = [
+    'class' => Formatter\JsonFormatter::class,
+    'constructor' => [
+        'batchMode' => Formatter\JsonFormatter::BATCH_MODE_JSON,
+        'appendNewline' => true,
+        'allowInlineLineBreaks' => true,
+    ],
+];
+$date = date('Y-m-d');
 if ($appEnv == 'rd') {
-    $path = BASE_PATH . sprintf('/runtime/logs/%s', $appName);
-    $debugFormatter = [
-        'class' => Formatter\LineFormatter::class,
-        'constructor' => [
-            'batchMode' => null,
-            'appendNewline' => null,
-            'allowInlineLineBreaks' => true,
-        ],
-    ];
-    $errorFormatter = [
-        'class' => Formatter\LineFormatter::class,
-        'constructor' => [
-            'allowInlineLineBreaks' => true,
-            'includeStacktraces' => true,
-        ],
-    ];
-    $infoFormatter = [
-        'class' => Formatter\LineFormatter::class,
-        'constructor' => [
-            'allowInlineLineBreaks' => true,
-            'includeStacktraces' => false,
-        ],
-    ];
+    $path = BASE_PATH . sprintf('/runtime/logs/');
     $debugHandler = [
-        'class' => Handler\StreamHandler::class,
+        'class' => RotatingFileHandler::class,
         'constructor' => [
-            'stream' => $path . '-debug-' . date('Y-m-d') . '.log',
+            'filename' => $path . 'debug.log',
             'level' => Logger::DEBUG,
         ],
-        'formatter' => $debugFormatter,
+        'formatter' => $formatter,
     ];
 
     $infoHandler = [
-        'class' => Handler\StreamHandler::class,
+        'class' => RotatingFileHandler::class,
         'constructor' => [
-            'stream' => $path . '-info-' . date('Y-m-d') . '.log',
+            'filename' => $path . 'info.log',
             'level' => Logger::INFO,
         ],
-        'formatter' => $infoFormatter,
-    ];
-    $errorHandler = [
-        'class' => Handler\StreamHandler::class,
-        'constructor' => [
-            'stream' => $path . '-error-' . date('Y-m-d') . '.log',
-            'level' => Logger::ERROR,
-        ],
-        'formatter' => $errorFormatter,
+        'formatter' => $formatter,
     ];
     return [
         'default' => [
             'handlers' => [
                 $debugHandler,
                 $infoHandler,
-                $errorHandler,
             ],
         ],
     ];
 
 } else {
     $path = env('LOG_DIR') . sprintf('%s/', $appName);
-    $formatter = [
-        'class' => Formatter\LineFormatter::class,
-        'constructor' => [
-            'allowInlineLineBreaks' => true,
-            'includeStacktraces' => true,
-        ],
-    ];
+    $handler = $closeLogger ? Handler\NullHandler::class : RotatingFileHandler::class;
     $infoHandler = [
-        'class' => Handler\StreamHandler::class,
+        'class' => $handler,
         'constructor' => [
-            'stream' => $path . 'info' . date('Y-m-d') . '.log',
+            'filename' => $path . 'info.log',
             'level' => Logger::INFO,
-        ],
-        'formatter' => $formatter,
-    ];
-    $errorHandler = [
-        'class' => Handler\StreamHandler::class,
-        'constructor' => [
-            'stream' => $path . 'error' . date('Y-m-d') . '.log',
-            'level' => Logger::ERROR,
-        ],
-        'formatter' => $formatter,
-    ];
-    $warningHandler = [
-        'class' => Handler\StreamHandler::class,
-        'constructor' => [
-            'stream' => $path . 'warning' . date('Y-m-d') . '.log',
-            'level' => Logger::WARNING,
         ],
         'formatter' => $formatter,
     ];
@@ -116,8 +73,6 @@ if ($appEnv == 'rd') {
         'default' => [
             'handlers' => [
                 $infoHandler,
-                $errorHandler,
-                $warningHandler,
             ],
         ],
     ];
