@@ -9,6 +9,7 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
+
 use Hyperf\Validation\Middleware\ValidationMiddleware;
 use TheFairLib\Middleware\Auth\ServiceAuthMiddleware;
 use TheFairLib\Middleware\RequestMiddleware;

@@ -1,15 +1,14 @@
 <?php
-/***************************************************************************
+
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
  *
- * Copyright (c) 2020 liumingzhi, Inc. All Rights Reserved
- *
- **************************************************************************
- *
- * @file Index.php
- * @author liumingzhi(liumingzhij26@gmail.com)
- * @date 2020-05-14 18:03:00
- *
- **/
+ * @link     https://www.hyperf.io
+ * @document https://doc.hyperf.io
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ */
 
 namespace App\Controller;
 
@@ -21,11 +20,9 @@ use TheFairLib\Controller\AbstractController;
  * @AutoController("/")
  *
  * @Doc(name="首页", desc="首页")
- * @package App\Controller
  */
 class Index extends AbstractController
 {
-
     /**
      * @Doc(name="首页", desc="首页")
      *

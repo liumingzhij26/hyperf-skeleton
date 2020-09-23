@@ -9,6 +9,7 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
+
 return [
     'enable' => false,
     'server' => env('APOLLO_SERVER', 'http://127.0.0.1:8080'),

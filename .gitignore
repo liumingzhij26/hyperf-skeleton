@@ -11,3 +11,6 @@ vendor/
 .DS_Store
 *.lock
 .phpunit*
+config/autoload/rd/*
+config/autoload/prod/*
+config/autoload/staging/*

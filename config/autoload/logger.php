@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /**
  * This file is part of Hyperf.
  *
@@ -11,16 +10,15 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
 
-use Monolog\Handler;
 use Monolog\Formatter;
+use Monolog\Handler;
 use Monolog\Logger;
 use TheFairLib\Library\Logger\RotatingFileHandler;
 
-//
 $appEnv = env('PHASE', 'rd');
 $appName = env('APP_NAME');
 //关闭日志写入功能
-$closeLogger = (bool)env('CLOSE_LOG', false);
+$closeLogger = (bool) env('CLOSE_LOG', false);
 $formatter = [
     'class' => Formatter\JsonFormatter::class,
     'constructor' => [
@@ -57,8 +55,7 @@ if ($appEnv == 'rd') {
             ],
         ],
     ];
-
-} else {
+}
     $path = env('LOG_DIR') . sprintf('%s/', $appName);
     $handler = $closeLogger ? Handler\NullHandler::class : RotatingFileHandler::class;
     $infoHandler = [
@@ -76,4 +73,3 @@ if ($appEnv == 'rd') {
             ],
         ],
     ];
-}

@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /**
  * This file is part of Hyperf.
  *
@@ -17,8 +16,8 @@ use TheFairLib\Exception\Handler\RateLimitExceptionHandler;
 use TheFairLib\Exception\Handler\Rpc\RpcAppExceptionHandler;
 use TheFairLib\Exception\Handler\Rpc\RpcQueryExceptionHandler;
 use TheFairLib\Exception\Handler\Rpc\RpcRateLimitExceptionHandler;
-use TheFairLib\Exception\Handler\Rpc\RpcValidationExceptionHandler;
 use TheFairLib\Exception\Handler\Rpc\RpcServiceExceptionHandler;
+use TheFairLib\Exception\Handler\Rpc\RpcValidationExceptionHandler;
 use TheFairLib\Exception\Handler\ServiceExceptionHandler;
 use TheFairLib\Exception\Handler\ValidationExceptionHandler;
 

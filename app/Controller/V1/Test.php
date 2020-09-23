@@ -20,10 +20,11 @@ use TheFairLib\Controller\AbstractController;
 /**
  * @Doc(name="测试", desc="主要用于文档测试")
  *
- * @author liumingzhi#thefair.net.cn
- *
  * @AutoController
  * @RpcService(name="v1/test", protocol="jsonrpc", server="json-rpc")
+ *
+ * @internal
+ * @coversNothing
  */
 class Test extends AbstractController
 {

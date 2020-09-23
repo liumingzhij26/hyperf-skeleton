@@ -9,12 +9,14 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
+
 namespace App\Request\V1\Test;
 
 use TheFairLib\Request\BaseRequest;
 
 /**
  * @internal
+ * @coversNothing
  */
 class GetTest extends BaseRequest
 {

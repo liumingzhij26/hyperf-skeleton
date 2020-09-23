@@ -9,16 +9,17 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
+
 return [
     'project_list' => [
         1 => [
-            'name' => '新世相读书会app',
+            'name' => 'xxx',
             'default_platform' => 'getui', //all
             'push_platform' => [
                 'getui' => [
                     'app_id' => 'xxxx',
                     'app_secret' => 'xxxx',
-                    'title' => '新世相读书会',
+                    'title' => 'xxx',
                     'logo' => 'logo.png',
                 ],
             ],
