@@ -14,3 +14,4 @@ vendor/
 config/autoload/rd/*
 config/autoload/prod/*
 config/autoload/staging/*
+bin/test.service
