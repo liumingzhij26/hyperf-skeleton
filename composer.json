@@ -56,7 +56,9 @@
             "Library\\": "library/",
             "Installer\\": "installer/"
         },
-        "files": []
+        "files": [
+            "library/Utils/Utility.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
