@@ -44,7 +44,7 @@ return [
                 'name' => 'http',
                 'type' => Server::SERVER_HTTP,
                 'host' => '0.0.0.0',
-                'port' => 9501,
+                'port' => (int) env('HTTP_POST', 4201),
                 'sock_type' => SWOOLE_SOCK_TCP,
                 'callbacks' => [
                     SwooleEvent::ON_REQUEST => [HttpServer::class, 'onRequest'],
