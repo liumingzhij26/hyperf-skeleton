@@ -31,11 +31,12 @@ return [
         ],
         'cache' => [
             'handler' => Hyperf\ModelCache\Handler\RedisHandler::class,
-            'cache_key' => 'mc:%s:m:%s:%s:%s',
+            'cache_key' => env('APP_NAME') . ':%s:' . env('PHASE', 'prod') . ':%s:%s:%s',
             'prefix' => 'default',
-            'ttl' => 3600 * 24,
-            'empty_model_ttl' => 600,
+            'ttl' => 3600,
+            'empty_model_ttl' => 30,
             'load_script' => true,
+            'use_default_value' => false,
         ],
         'commands' => [
             'gen:model' => [

@@ -15,6 +15,14 @@ use Hyperf\Server\SwooleEvent;
 use TheFairLib\Server\Core\HttpServer;
 use TheFairLib\Server\Core\TcpServer;
 
+$appEnv = env('PHASE', 'rd');
+$appName = env('APP_NAME');
+$logName = "service.error.txt";
+if ($appEnv == 'rd') {
+    $logFile = BASE_PATH . sprintf('/runtime/logs/%s', $logName);
+} else {
+    $logFile = rtrim(env('LOG_DIR'), '\\/') . sprintf('/%s/%s', $appName, $logName);
+}
 return [
     'mode' => SWOOLE_PROCESS,
     'servers' => value(function () {
@@ -61,11 +69,15 @@ return [
         'max_coroutine' => 100000,
         'open_http2_protocol' => true,
         'max_request' => 100000,
+        'log_file' => $logFile,
+        'backlog' => 1024,                       // listen backlog
 
         //https://wiki.swoole.com/wiki/page/612.html
         'socket_buffer_size' => 2 * 1024 * 1024, //单次最大发送长度，理论上不允许大于 1M
 
         'task_worker_num' => 2,
+        // 因为 `Task` 主要处理无法协程化的方法，所以这里推荐设为 `false`，避免协程下出现数据混淆的情况
+        'task_enable_coroutine' => false,
     ],
     'callbacks' => [
         SwooleEvent::ON_BEFORE_START => [Hyperf\Framework\Bootstrap\ServerStartCallback::class, 'beforeStart'],
