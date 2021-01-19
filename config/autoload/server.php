@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 /**
  * This file is part of Hyperf.
  *
@@ -10,10 +11,11 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
 
+use Hyperf\Server\Event;
 use Hyperf\Server\Server;
-use Hyperf\Server\SwooleEvent;
 use TheFairLib\Server\Core\HttpServer;
 use TheFairLib\Server\Core\TcpServer;
+
 
 $appEnv = env('PHASE', 'rd');
 $appName = env('APP_NAME');
@@ -32,10 +34,10 @@ return [
                 'name' => 'json-rpc',
                 'type' => Server::SERVER_BASE,
                 'host' => '0.0.0.0',
-                'port' => (int) env('RPC_PORT', 3201),
+                'port' => (int)env('RPC_PORT', 3201),
                 'sock_type' => SWOOLE_SOCK_TCP,
                 'callbacks' => [
-                    SwooleEvent::ON_RECEIVE => [TcpServer::class, 'onReceive'],
+                    Event::ON_RECEIVE => [TcpServer::class, 'onReceive'],
                 ],
                 'settings' => [
                     'open_length_check' => true,
@@ -45,20 +47,17 @@ return [
                     'package_max_length' => 1024 * 1024 * 2,
                 ],
             ],
-        ];
-
-        if (env('PHASE') == 'rd') {
-            $data[] = [
+            [
                 'name' => 'http',
                 'type' => Server::SERVER_HTTP,
                 'host' => '0.0.0.0',
-                'port' => (int) env('HTTP_PORT', 4201),
+                'port' => (int)env('HTTP_PORT', 4201),
                 'sock_type' => SWOOLE_SOCK_TCP,
                 'callbacks' => [
-                    SwooleEvent::ON_REQUEST => [HttpServer::class, 'onRequest'],
+                    Event::ON_REQUEST => [HttpServer::class, 'onRequest'],
                 ],
-            ];
-        }
+            ],
+        ];
         return $data;
     }),
     'settings' => [
@@ -74,19 +73,21 @@ return [
 
         //https://wiki.swoole.com/wiki/page/612.html
         'socket_buffer_size' => 2 * 1024 * 1024, //单次最大发送长度，理论上不允许大于 1M
+        'buffer_output_size' => 2 * 1024 * 1024,
 
         'task_worker_num' => 2,
         // 因为 `Task` 主要处理无法协程化的方法，所以这里推荐设为 `false`，避免协程下出现数据混淆的情况
         'task_enable_coroutine' => false,
     ],
     'callbacks' => [
-        SwooleEvent::ON_BEFORE_START => [Hyperf\Framework\Bootstrap\ServerStartCallback::class, 'beforeStart'],
-        SwooleEvent::ON_WORKER_START => [Hyperf\Framework\Bootstrap\WorkerStartCallback::class, 'onWorkerStart'],
-        SwooleEvent::ON_PIPE_MESSAGE => [Hyperf\Framework\Bootstrap\PipeMessageCallback::class, 'onPipeMessage'],
+        Event::ON_BEFORE_START => [Hyperf\Framework\Bootstrap\ServerStartCallback::class, 'beforeStart'],
+        Event::ON_WORKER_START => [Hyperf\Framework\Bootstrap\WorkerStartCallback::class, 'onWorkerStart'],
+        Event::ON_PIPE_MESSAGE => [Hyperf\Framework\Bootstrap\PipeMessageCallback::class, 'onPipeMessage'],
+        Event::ON_WORKER_EXIT => [Hyperf\Framework\Bootstrap\WorkerExitCallback::class, 'onWorkerExit'],
 
         // Task callbacks
-        SwooleEvent::ON_TASK => [Hyperf\Framework\Bootstrap\TaskCallback::class, 'onTask'],
-        SwooleEvent::ON_FINISH => [Hyperf\Framework\Bootstrap\FinishCallback::class, 'onFinish'],
-        SwooleEvent::ON_SHUTDOWN => [Hyperf\Framework\Bootstrap\ShutdownCallback::class, 'onShutdown'],
+        Event::ON_TASK => [Hyperf\Framework\Bootstrap\TaskCallback::class, 'onTask'],
+        Event::ON_FINISH => [Hyperf\Framework\Bootstrap\FinishCallback::class, 'onFinish'],
+        Event::ON_SHUTDOWN => [Hyperf\Framework\Bootstrap\ShutdownCallback::class, 'onShutdown'],
     ],
 ];

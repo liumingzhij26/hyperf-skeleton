@@ -13,7 +13,12 @@ declare(strict_types=1);
 use Hyperf\AsyncQueue\Process\ConsumerProcess;
 use Hyperf\Crontab\Process\CrontabDispatcherProcess;
 
-return [
-    ConsumerProcess::class,
-    CrontabDispatcherProcess::class,
-];
+return value(function () {
+    if (!env('CRONTAB_ENABLE', false)) {
+        return [];
+    }
+    return [
+        ConsumerProcess::class,
+        CrontabDispatcherProcess::class,
+    ];
+});

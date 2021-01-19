@@ -14,16 +14,16 @@
     "require": {
         "php": ">=7.2",
         "ext-swoole": ">=4.5",
-        "thefair/thefairlib": "^4.2"
+        "thefair/thefairlib": "dev-rpc2.1"
     },
     "require-dev": {
         "swoole/ide-helper": "^4.5",
-        "phpmd/phpmd": "^2.6",
         "friendsofphp/php-cs-fixer": "^2.14",
         "mockery/mockery": "^1.0",
         "phpstan/phpstan": "^0.12",
-        "hyperf/testing": "~2.0.0",
-        "hyperf/watcher": "^2.0"
+        "hyperf/devtool": "~2.1.0",
+        "hyperf/testing": "~2.1.0",
+        "hyperf/watcher": "^2.1.0"
     },
     "suggest": {
         "ext-openssl": "Required to use HTTPS.",
@@ -49,6 +49,10 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
     "extra": [],
     "scripts": {
         "post-root-package-install": [
@@ -58,11 +62,11 @@
             "rm -rf runtime/container",
             "php ./bin/hyperf.php > /dev/null 2>&1"
         ],
-        "analyse": "phpstan analyse --memory-limit 600M -l 0 -c phpstan.neon ./app ./config",
-        "cs-fix": "php-cs-fixer fix ./app",
-        "start": "composer dump-autoload -o &&  php ./bin/hyperf.php && php ./bin/hyperf.php start",
-        "request": "php ./bin/hyperf.php request",
         "test": "co-phpunit -c phpunit.xml --colors=always",
+        "analyse": "phpstan analyse --memory-limit 600M -l 0 -c phpstan.neon ./app ./config",
+        "start": "composer dump-autoload -o &&  php ./bin/hyperf.php && php ./bin/hyperf.php start",
+        "cs-fix": "php-cs-fixer fix ./app",
+        "request": "php ./bin/hyperf.php request",
         "upgrade": [
             "composer up",
             "composer dump-autoload -o"
@@ -72,6 +76,10 @@
         "packagist": {
             "type": "composer",
             "url": "https://mirrors.aliyun.com/composer/"
+        },
+        "thefair/thefairlib": {
+            "type": "path",
+            "url": "/Users/liumingzhi/lmz/thefairlib"
         }
     }
 }
