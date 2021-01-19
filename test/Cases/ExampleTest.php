@@ -20,5 +20,6 @@ class ExampleTest extends HttpTestCase
     {
         $this->assertTrue(true);
         $this->assertTrue(is_array($this->get('/')));
+        $this->assertTrue(is_array($this->get('/ping')));
     }
 }

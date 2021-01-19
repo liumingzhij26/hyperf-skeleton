@@ -65,7 +65,7 @@
             "php ./bin/hyperf.php > /dev/null 2>&1"
         ],
         "test": "co-phpunit -c phpunit.xml --colors=always",
-        "analyse": "phpstan analyse --memory-limit 600M -l 0 -c phpstan.neon ./app ./config",
+        "analyse": "phpstan analyse --memory-limit=600M -l 0 -c phpstan.neon ./app ./config",
         "start": "composer dump-autoload -o &&  php ./bin/hyperf.php && php ./bin/hyperf.php start",
         "cs-fix": "php-cs-fixer fix ./app",
         "request": "php ./bin/hyperf.php request",
