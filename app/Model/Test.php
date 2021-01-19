@@ -13,10 +13,6 @@ namespace App\Model;
 
 use TheFairLib\Model\DataModel;
 
-/**
- * @internal
- * @coversNothing
- */
 class Test extends DataModel
 {
 }

@@ -22,8 +22,6 @@ use TheFairLib\Controller\AbstractController;
  * @AutoController
  * @RpcService(name="v1/test", protocol="jsonrpc", server="json-rpc")
  *
- * @internal
- * @coversNothing
  */
 class Test extends AbstractController
 {

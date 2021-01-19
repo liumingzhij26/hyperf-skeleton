@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 /**
  * This file is part of Hyperf.
  *
@@ -15,6 +16,7 @@ use Psr\Log\LogLevel;
 
 return [
     'app_name' => env('APP_NAME'),
+    'scan_cacheable' => env('SCAN_CACHEABLE', false),
     StdoutLoggerInterface::class => [
         'log_level' => [
             LogLevel::ALERT,

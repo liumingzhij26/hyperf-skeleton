@@ -13,10 +13,6 @@ namespace App\Request\V1\Test;
 
 use TheFairLib\Request\BaseRequest;
 
-/**
- * @internal
- * @coversNothing
- */
 class GetTest extends BaseRequest
 {
     /**

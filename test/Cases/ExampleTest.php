@@ -14,10 +14,6 @@ namespace HyperfTest\Cases;
 
 use HyperfTest\HttpTestCase;
 
-/**
- * @internal
- * @coversNothing
- */
 class ExampleTest extends HttpTestCase
 {
     public function testExample()
