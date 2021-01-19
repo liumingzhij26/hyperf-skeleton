@@ -14,3 +14,4 @@ use App\Controller\Index;
 use Hyperf\HttpServer\Router\Router;
 
 Router::addRoute(['GET', 'POST', 'HEAD'], '/', Index::class . '@index');
+Router::addRoute(['GET', 'POST', 'HEAD'], '/ping', Index::class . '@ping');

@@ -30,6 +30,7 @@ return [
             '/',
             '/index',
             '/index/index',
+            '/ping'
         ],
     ],
 ];

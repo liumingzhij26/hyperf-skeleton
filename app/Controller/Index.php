@@ -9,6 +9,7 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
+
 namespace App\Controller;
 
 use Hyperf\HttpServer\Annotation\AutoController;
@@ -30,5 +31,15 @@ class Index extends AbstractController
     public function index()
     {
         return $this->showSuccess();
+    }
+
+    /**
+     * @Doc(name="ping 连接性测试", desc="连接性测试")
+     *
+     * @return array|mixed
+     */
+    public function ping()
+    {
+        return $this->showSuccess('pong');
     }
 }
