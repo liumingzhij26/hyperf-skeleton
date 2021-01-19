@@ -11,12 +11,18 @@ declare(strict_types=1);
  */
 
 return [
+
     'default' => [
         'driver' => Hyperf\AsyncQueue\Driver\RedisDriver::class,
-        'channel' => 'queue',
-        'timeout' => 2,
-        'retry_seconds' => 5,
-        'handle_timeout' => 10,
-        'processes' => 1,
+        'channel' => sprintf('%s#%s#redis_default_queue', env('APP_NAME'), env('PHASE', 'prod')),
+        'timeout' => 5,
+        'retry_seconds' => [//失败后重新尝试间隔
+            1, 5, 60, 300, 3600,
+        ],
+        'handle_timeout' => 5,//消息处理超时时间
+        'processes' => 1,//消费进程数
+        'concurrent' => [
+            'limit' => 5,//同时处理消息数
+        ],
     ],
 ];
