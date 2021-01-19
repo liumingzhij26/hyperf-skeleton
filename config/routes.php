@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 /**
  * This file is part of Hyperf.
  *
@@ -13,5 +14,5 @@ declare(strict_types=1);
 use App\Controller\Index;
 use Hyperf\HttpServer\Router\Router;
 
-Router::addRoute(['GET', 'POST', 'HEAD'], '/', Index::class . '@index');
-Router::addRoute(['GET', 'POST', 'HEAD'], '/ping', Index::class . '@ping');
+Router::addRoute(['GET', 'HEAD'], '/', Index::class . '@index');
+Router::addRoute(['GET', 'HEAD'], '/ping', Index::class . '@ping');
