@@ -14,7 +14,7 @@
     "require": {
         "php": ">=7.2",
         "ext-swoole": ">=4.5",
-        "thefair/thefairlib": "dev-rpc2.1"
+        "thefair/thefairlib": "~4.3.0"
     },
     "require-dev": {
         "swoole/ide-helper": "^4.5",
@@ -78,10 +78,6 @@
         "packagist": {
             "type": "composer",
             "url": "https://mirrors.aliyun.com/composer/"
-        },
-        "thefair/thefairlib": {
-            "type": "path",
-            "url": "/Users/liumingzhi/lmz/thefairlib"
         }
     }
 }
