@@ -1,0 +1,17 @@
+[Unit]
+Description=xxx service Http Server
+After=network.target
+After=syslog.target
+
+[Service]
+Type=simple
+LimitNOFILE=65535
+ExecStart=/usr/bin/php /home/user/www/xxx_service/bin/hyperf.php start
+ExecStop=/usr/bin/sh /home/user/www/xxx_service/bin/stop.sh
+ExecReload=/bin/kill -USR1 $MAINPID
+Restart=always
+RestartSec=5s
+TimeoutStopSec=120s
+
+[Install]
+WantedBy=multi-user.target graphical.target
