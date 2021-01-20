@@ -35,5 +35,5 @@ echo "[start] service stop"
 if [ -f "./runtime/hyperf.pid" ]; then
     pid=$(cat ./runtime/hyperf.pid)
     echo $pid
-    /bin/kill -USR1 $pid
+    /bin/kill -TERM $pid
 fi
