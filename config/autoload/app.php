@@ -14,4 +14,7 @@ return [
     'cookie' => [
         'default_domain' => env('DEFAULT_DOMAIN', ''),
     ],
+
+    //slb 负载状态检测
+    'service_status_path' => BASE_PATH . sprintf('/runtime/service_status'),
 ];
