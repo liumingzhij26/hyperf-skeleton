@@ -17,3 +17,5 @@ config/autoload/staging/*
 bin/test.service
 .php_cs.cache
 cacahe
+.htaccess
+.workflow

@@ -6,9 +6,10 @@ After=syslog.target
 [Service]
 Type=simple
 LimitNOFILE=65535
+ExecStartPre=/usr/bin/php /home/user/www/xxx_service/bin/hyperf.php manage:start
 ExecStart=/usr/bin/php /home/user/www/xxx_service/bin/hyperf.php start
-ExecStop=/usr/bin/sh /home/user/www/xxx_service/bin/stop.sh
-ExecReload=/bin/kill -USR1 $MAINPID
+ExecStop=/usr/bin/sh /home/user/www/xxx_service/vendor/bin/service_stop.sh
+ExecReload=/bin/kill -TERM $MAINPID
 Restart=always
 RestartSec=5s
 TimeoutStopSec=120s

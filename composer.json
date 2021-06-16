@@ -14,7 +14,6 @@
     "require": {
         "php": ">=7.2",
         "ext-swoole": ">=4.5",
-        "hyperf/signal": "^2.1",
         "thefair/thefairlib": "~4.3.0"
     },
     "require-dev": {
@@ -70,8 +69,8 @@
         "start": "composer dump-autoload -o &&  php ./bin/hyperf.php && php ./bin/hyperf.php start",
         "cs-fix": "php-cs-fixer fix ./app",
         "request": "php ./bin/hyperf.php request",
+        "doc": "php ./bin/hyperf.php doc:wiki",
         "upgrade": [
-            "composer up",
             "composer dump-autoload -o"
         ]
     },
