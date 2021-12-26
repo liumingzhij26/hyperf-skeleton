@@ -14,7 +14,7 @@ return [
     'storage' => [
         'local' => [
             'driver' => \Hyperf\Filesystem\Adapter\LocalAdapterFactory::class,
-            'root' => __DIR__ . '/../../runtime/file/',
+            'root' => __DIR__ . '/../../runtime/file',
         ],
         'ftp' => [
             'driver' => \Hyperf\Filesystem\Adapter\FtpAdapterFactory::class,
