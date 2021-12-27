@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 use Hyperf\Server\Event;
 use Hyperf\Server\Server;
+use Swoole\Constant;
 use TheFairLib\Server\Core\HttpServer;
 use TheFairLib\Server\Core\TcpServer;
 
@@ -61,19 +62,21 @@ return [
         return $data;
     }),
     'settings' => [
-        'enable_coroutine' => true,
-        'worker_num' => swoole_cpu_num(),
-        'pid_file' => BASE_PATH . '/runtime/hyperf.pid',
-        'open_tcp_nodelay' => true,
-        'max_coroutine' => 100000,
-        'open_http2_protocol' => true,
-        'max_request' => 100000,
-        'log_file' => $logFile,
-        'backlog' => 1024,                       // listen backlog
+        Constant::OPTION_ENABLE_COROUTINE => true,
+        Constant::OPTION_WORKER_NUM => swoole_cpu_num(),
+        Constant::OPTION_PID_FILE => BASE_PATH . '/runtime/hyperf.pid',
+        Constant::OPTION_OPEN_TCP_NODELAY => true,
+        Constant::OPTION_MAX_COROUTINE => 100000,
+        Constant::OPTION_OPEN_HTTP2_PROTOCOL => true,
+        Constant::OPTION_MAX_REQUEST => 100000,
+        Constant::OPTION_LOG_FILE => $logFile,
+        Constant::OPTION_BACKLOG => 1024,                       // listen backlog
 
         //https://wiki.swoole.com/wiki/page/612.html
-        'socket_buffer_size' => 2 * 1024 * 1024, //单次最大发送长度，理论上不允许大于 1M
-        'buffer_output_size' => 2 * 1024 * 1024,
+//        'socket_buffer_size' => 2 * 1024 * 1024, //单次最大发送长度，理论上不允许大于 1M
+//        'buffer_output_size' => 2 * 1024 * 1024,
+        Constant::OPTION_SOCKET_BUFFER_SIZE => 2 * 1024 * 1024,
+        Constant::OPTION_BUFFER_OUTPUT_SIZE => 2 * 1024 * 1024,
 
         'task_worker_num' => 2,
         // 因为 `Task` 主要处理无法协程化的方法，所以这里推荐设为 `false`，避免协程下出现数据混淆的情况
